@@ -1,0 +1,39 @@
+{
+    "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.14.0",
+        "@fortawesome/free-brands-svg-icons": "^5.14.0",
+        "@fortawesome/free-regular-svg-icons": "^5.14.0",
+        "@fortawesome/free-solid-svg-icons": "^5.14.0",
+        "@popperjs/core": "^2.9.2",
+        "@symfony/webpack-encore": "^1.5.0",
+        "core-js": "^3.0.0",
+        "css-loader": "^6.2.0",
+        "extract-text-webpack-plugin": "^4.0.0-beta.0",
+        "file-loader": "^6.0.0",
+        "node-sass": "^6.0.1",
+        "regenerator-runtime": "^0.13.2",
+        "sass-loader": "^9.0.1",
+        "style-loader": "^3.2.1",
+        "uglifyjs-webpack-plugin": "^2.2.0",
+        "webpack-cli": "^4.7.2",
+        "webpack-notifier": "^1.6.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "name": "tianos",
+    "version": "1.0.0",
+    "main": "index.js",
+    "dependencies": {
+        "bootstrap": "^5.0.2",
+        "copy-webpack-plugin": "^8.1.1",
+        "html-webpack-plugin": "^5.3.2",
+        "jquery": "^3.5.1",
+        "moment": "^2.29.0"
+    }
+}

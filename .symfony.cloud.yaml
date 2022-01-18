@@ -1,0 +1,9 @@
+#https://symfony.com/doc/current/the-fast-track/es/24-cron.html
+#https://symfony.com/doc/current/cloud/config.html
+
+timezone: America/Lima
+
+crons:
+    update_doc:
+        spec: 0/30 * * * * ? *
+        cmd: croncape bin/console app:play-board

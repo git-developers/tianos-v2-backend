@@ -1,0 +1,59 @@
+# https://raw.githubusercontent.com/git-developers/Tianos-Backend/master/src/Bundle/CoreBundle/Resources/makefiles/tasks
+NOW := $(shell /bin/date "+%Y-%m-%d . %H:%M:%S")
+AUTHOR_EMAIL := "git@tianos.com"
+AUTHOR_NAME := "Jafeth"
+HOST_PROJECT := tianos.com
+DATABASE_NAME := tianos
+
+assets:
+	$(eval ENV := dev)
+	$(eval DEBUG := )
+ifeq ($(env), prod)
+	$(eval ENV := prod)
+	$(eval DEBUG := --no-debug)
+endif
+
+	make delete
+	php bin/console cache:clear --env=$(ENV) $(DEBUG);
+	php bin/console assets:install --symlink --env=$(ENV) $(DEBUG);
+	php bin/console assetic:dump --env=$(ENV) $(DEBUG);
+	make perm
+
+save:
+	git add .
+	git config --global user.email $(AUTHOR_EMAIL)
+	git config --global user.name $(AUTHOR_NAME) --replace-all
+	git commit -m "Tianos said -> modifications made on: $(NOW)"
+ifeq ($(http), 1)
+	git push origin_http master
+else
+	git push github master
+endif
+
+doctrine_update:
+	php bin/console doctrine:migration:status
+	php bin/console doctrine:migration:diff
+
+sql:
+	php bin/console doctrine:query:sql "$(query)"
+
+routing:
+	php bin/console tianos:crud:routing BackendBundle
+
+mysql:
+	$(eval DB := $(DATABASE_NAME))
+ifeq ($(db), false)
+	$(eval DB := '')
+endif
+	mysql -h localhost -u root -proot $(DB)
+
+db_load:
+	php bin/console doctrine:database:drop --force --if-exists
+	php bin/console doctrine:database:create --if-not-exists
+	php bin/console doctrine:migrations:diff
+	php bin/console doctrine:migrations:migrate --no-interaction
+	make load_fixture
+
+load_fixture:
+	#php bin/console tianos:truncate:tables
+	php bin/console doctrine:fixtures:load --no-interaction
