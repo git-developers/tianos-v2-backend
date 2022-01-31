@@ -76,4 +76,22 @@ class TikTokController extends AbstractController
         ]);
     }
 
+    /**
+    * @Route("/list", name="list2", methods={"GET", "POST"})
+    */
+    public function index2(Request $request, TiktokFeedRepository $tiktokFeedRepository)
+    {
+        $tiktokFeed = $tiktokFeedRepository->findAll();
+        $out = [];
+        foreach($tiktokFeed as $value){
+            $out[] = $value->getUrlList();
+        }
+        return $this->json([
+            "status" => "1",
+            "message" => "",
+            "author" => $out
+        ]);
+    }
 }
+
+
