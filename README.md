@@ -91,3 +91,9 @@ http://localhost:8080/
 
 vue create hello-project
 npm run serve
+
+
+LOCALHOST
+==========
+http://localhost/tianos-backend/public/index.php/tik-tok/feed
+http://localhost/tianos-backend/public/index.php/tik-tok/list

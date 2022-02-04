@@ -72,25 +72,41 @@ class TikTokController extends AbstractController
 
         return $this->json([
             "count" => count($ids),
-            "aweme_ids" => $ids
+            "aweme_ids" => $ids,
+            "author_nickname" => $value->author->nickname,
+            "author_signature" => $value->author->signature
         ]);
     }
 
     /**
-    * @Route("/list", name="list2", methods={"GET", "POST"})
-    */
+     * @Route("/list", name="list2", methods={"GET", "POST"})
+     */
     public function index2(Request $request, TiktokFeedRepository $tiktokFeedRepository)
     {
         $tiktokFeed = $tiktokFeedRepository->findAll();
+
         $out = [];
-        foreach($tiktokFeed as $value){
-            $out[] = $value->getUrlList();
+        foreach ($tiktokFeed as $value) {
+            $url = $value->getUrlList();
+            $nickname = $value->getAwemeId();
+            $author_id = $value->getAuthorUid();
+            $out[]= ([
+                "url" => $url,
+                "aweme_id" => $nickname,
+                "author_id" => $author_id
+
+
+
+            ]);
         }
-        return $this->json([
-            "status" => "1",
-            "message" => "",
-            "author" => $out
-        ]);
+
+        return $this->json(
+            [
+                "status" => "1",
+                "message" => "",
+                "items" => $out
+            ]
+        );
     }
 }
 

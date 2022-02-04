@@ -63,6 +63,18 @@ class TiktokFeed
      */
     private $aweme_id;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="aweme_nickname", type="text", length=65535, nullable=true)
+     */
+    private $aweme_nickname;
+
+
+
+
+
+
 
 
 
@@ -146,6 +158,17 @@ class TiktokFeed
         return $this;
     }
 
+    public function getAwemeNickname(): ?string
+    {
+        return $this->aweme_nickname;
+    }
+
+    public function setAwemeNickname(?string $aweme_nickname): self
+    {
+        $this->aweme_nickname = $aweme_nickname;
+
+        return $this;
+    }
 
 
 }
