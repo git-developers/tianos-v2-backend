@@ -70,6 +70,13 @@ class TiktokFeed
      */
     private $aweme_nickname;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="aweme_nickname", type="text", length=65535, nullable=true)
+     */
+    private $author_signature;
+
 
 
 

@@ -64,6 +64,7 @@ class TikTokController extends AbstractController
             $a->setAwemeId($value->aweme_id);
             $a->setUrlList($value->video->play_addr->url_list[2]);
             $a->setAuthorUid($value->author->uid);
+            $a->setAwemeNickname($value->author->nickname);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($a);
             $entityManager->flush();
@@ -90,20 +91,20 @@ class TikTokController extends AbstractController
             $url = $value->getUrlList();
             $nickname = $value->getAwemeId();
             $author_id = $value->getAuthorUid();
-            $out[]= ([
+            $author_nick = $value->getAwemeNickname();
+            $out[]= [
                 "url" => $url,
                 "aweme_id" => $nickname,
-                "author_id" => $author_id
-
-
-
-            ]);
+                "author_id" => $author_id,
+                "author_nick" => $author_nick,
+            ];
         }
 
         return $this->json(
             [
-                "status" => "1",
-                "message" => "",
+                "status" => "3",
+                "statusHttp" => "200",
+                "message" => "server error",
                 "items" => $out
             ]
         );
