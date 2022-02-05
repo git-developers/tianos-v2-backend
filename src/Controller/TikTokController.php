@@ -93,11 +93,13 @@ class TikTokController extends AbstractController
             $nickname = $value->getAwemeId();
             $author_id = $value->getAuthorUid();
             $author_nick = $value->getAwemeNickname();
+            $author_signature = $value->getAuthorSignature();
             $out[]= [
                 "url" => $url,
                 "aweme_id" => $nickname,
                 "author_id" => $author_id,
                 "author_nick" => $author_nick,
+                "author_signature" => $author_signature,
             ];
         }
 
