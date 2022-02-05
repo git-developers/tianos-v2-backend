@@ -73,9 +73,10 @@ class TiktokFeed
     /**
      * @var string|null
      *
-     * @ORM\Column(name="aweme_nickname", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="author_signature", type="text", length=65535, nullable=true)
      */
     private $author_signature;
+
 
 
 
@@ -176,6 +177,19 @@ class TiktokFeed
 
         return $this;
     }
+
+    public function getAuthorSignature(): ?string
+    {
+        return $this->author_signature;
+    }
+
+    public function setAuthorSignature(?string $author_signature): self
+    {
+        $this->author_signature = $author_signature;
+
+        return $this;
+    }
+
 
 
 }

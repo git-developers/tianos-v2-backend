@@ -65,6 +65,7 @@ class TikTokController extends AbstractController
             $a->setUrlList($value->video->play_addr->url_list[2]);
             $a->setAuthorUid($value->author->uid);
             $a->setAwemeNickname($value->author->nickname);
+            $a->setAuthorSignature($value->author->signature);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($a);
             $entityManager->flush();
