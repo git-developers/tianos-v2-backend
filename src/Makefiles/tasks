@@ -26,11 +26,7 @@ save:
 	git commit -m "Tianos said -> modifications made on: $(NOW)"
 ifeq ($(http), 1)
 	git push origin_http master
-else
-	git push github master
-endif
-
-doctrine_update:
+else+¡
 	php bin/console doctrine:migration:status
 	php bin/console doctrine:migration:diff
 

@@ -63,6 +63,26 @@ class TiktokFeed
      */
     private $aweme_id;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="aweme_nickname", type="text", length=65535, nullable=true)
+     */
+    private $aweme_nickname;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="author_signature", type="text", length=65535, nullable=true)
+     */
+    private $author_signature;
+
+
+
+
+
+
+
 
 
 
@@ -142,6 +162,30 @@ class TiktokFeed
     public function setAwemeId(?string $aweme_id): self
     {
         $this->aweme_id = $aweme_id;
+
+        return $this;
+    }
+
+    public function getAwemeNickname(): ?string
+    {
+        return $this->aweme_nickname;
+    }
+
+    public function setAwemeNickname(?string $aweme_nickname): self
+    {
+        $this->aweme_nickname = $aweme_nickname;
+
+        return $this;
+    }
+
+    public function getAuthorSignature(): ?string
+    {
+        return $this->author_signature;
+    }
+
+    public function setAuthorSignature(?string $author_signature): self
+    {
+        $this->author_signature = $author_signature;
 
         return $this;
     }
