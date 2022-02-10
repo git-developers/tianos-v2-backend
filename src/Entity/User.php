@@ -228,7 +228,7 @@ class User implements UserInterface
 
     public function getPassword(): ?string
     {
-        return $this->password;
+        return $this->decode(password);
     }
 
     public function setPassword(string $password): self

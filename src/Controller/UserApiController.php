@@ -23,7 +23,7 @@ class UserApiController extends AbstractController
 {
 
     /**
-     * @Route("/new", name="user_api_new", methods={"POST"})
+     * @Route("/new", name="user_api_new", methods={"POST","GET"})
      */
     public function new(Request $request, UserRepository $userRepository, UserPasswordEncoderInterface $encoder): Response
     {
@@ -32,20 +32,33 @@ class UserApiController extends AbstractController
             $data = json_decode($request->getContent(), true);
         }
 
+        if (!$request->isMethod('POST')) {
+            /*return $this->json([
+                'error' => 'NOT_POST'
+            ]);*/
+        }
+
+        $data = $request->query->all();
+        /*
+        print_r($data['username']);
+        print_r($data['password']);
+        print_r($data['email']);
+        print_r($data['name']);
+        */
+
         $user = new User();
         $form = $this->createForm(UserLoginType::class, $user);
 
-        if (!$request->isMethod('POST')) {
-            return $this->json([
-                'error' => 'NOT_POST'
-            ]);
-        }
 
         $form->submit($data, false);
 
         $errors = [];
         $userByEmail = $userRepository->loadUserByUsername($data['email']);
         $userByUsername = $userRepository->loadUserByUsername($data['username']);
+        /*
+        $userByName = $userRepository->loadUserByUsername($data['name']);
+        $userByPassword = $userRepository->loadUserByUsername($data['password']);
+        */
 
         if (isset($userByEmail)) {
             $errors[] = "E-Mail adress has already been registered";
@@ -76,9 +89,12 @@ class UserApiController extends AbstractController
                 $user->setRoles([User::ROLE_TIANOS]);
             }
             */
-            
-            $encoded = $encoder->encodePassword($user, $data['password']);
-            $user->setPassword($encoded);
+
+            //$encoded = $encoder->encodePassword($user, $data['password']);
+            $user->setName($data['name']);
+            $user->setPassword($data['password']);
+            $user->setUsername($data['username']);
+            $user->setEmail($data['email']);
 
             $user->setRoles([User::ROLE_TIANOS]);
             $entityManager = $this->getDoctrine()->getManager();
@@ -86,8 +102,17 @@ class UserApiController extends AbstractController
             $entityManager->flush();
         }
 
+        /*
+        $response->headers->set('Content-Type', 'application/json');
+        // Allow all websites
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        */
+
         return $this->json([
             'id' => $user->getId(),
+            'username' => $user->getUsername(),
+            'password' => $user->getPassword()
+
         ]);
     }
 
