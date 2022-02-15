@@ -55,10 +55,10 @@ class UserApiController extends AbstractController
         $errors = [];
         $userByEmail = $userRepository->loadUserByUsername($data['email']);
         $userByUsername = $userRepository->loadUserByUsername($data['username']);
-        /*
-        $userByName = $userRepository->loadUserByUsername($data['name']);
-        $userByPassword = $userRepository->loadUserByUsername($data['password']);
-        */
+
+        /*$userByName = $userRepository->loadUserByUsername($data['name']);
+        $userByPassword = $userRepository->loadUserByUsername($data['password']);*/
+
 
         if (isset($userByEmail)) {
             $errors[] = "E-Mail adress has already been registered";
@@ -119,10 +119,10 @@ class UserApiController extends AbstractController
     /**
      * @Route("/login/{username}", name="user_api_login", methods={"GET"})
      */
-    public function login(Request $request, UserRepository $userRepository, $username): Response
+    public function login(Request $request, UserRepository $userRepository): Response
     {
 
-        $user = $userRepository->loadUserByUsername($username);
+        $user = $userRepository->loadUserByUsername($request->get("username"));
 
         if (!$user) {
             return $this->json([
@@ -132,6 +132,15 @@ class UserApiController extends AbstractController
 
         $token = new UsernamePasswordToken($user, $user->getPassword(), "public", $user->getRoles());
         $this->get("security.token_storage")->setToken($token);
+
+        return $this->json(
+            [
+                "status" => "3",
+                "message" => "server error",
+            ]
+        );
+
+
 
         /*
         if (in_array(User::ROLE_ADMIN, $user->getRoles())) {
@@ -143,7 +152,7 @@ class UserApiController extends AbstractController
         }
         */
 
-        return $this->redirectToRoute('backend');
+        //return $this->redirectToRoute('backend');
 
 
         // Fire the login event

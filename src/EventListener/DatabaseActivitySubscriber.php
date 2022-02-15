@@ -49,6 +49,7 @@ class DatabaseActivitySubscriber implements EventSubscriber
         if ($entity instanceof User) {
 
             $encoded = $this->encoder->encodePassword($entity, $entity->getPassword());
+            //$encoded = $entity->getPassword();
             $entity->setPassword($encoded);
 
             //$entity->setPassword(uniqid());
