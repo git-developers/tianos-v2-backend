@@ -59,6 +59,7 @@ class UserApiController extends AbstractController
         /*$userByName = $userRepository->loadUserByUsername($data['name']);
         $userByPassword = $userRepository->loadUserByUsername($data['password']);*/
 
+        $errors = [];
 
         if (isset($userByEmail)) {
             $errors[] = "E-Mail adress has already been registered";
