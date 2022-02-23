@@ -14,6 +14,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class SecurityController extends AbstractController
 {
 
+    const STATUS_SUCESS = "1";
+    const STATUS_WARNING = "2";
+    const STATUS_ERROR = "3";
 
     /**
      * @Route("/login", name="login")
@@ -51,7 +54,7 @@ class SecurityController extends AbstractController
 
         return $this->json(
             [
-                "status" => "logged",
+                "status" => self::STATUS_SUCESS,
                 "msg" => "success",
             ]
         );
@@ -81,14 +84,15 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/logout2", name="logout2")
      */
-    public function logout()
+    public function logout2()
     {
 
 
 
-
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        $this->get('security.token_storage')->setToken(null);
+        $this->get('request')->getSession()->invalidate();
+        //throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

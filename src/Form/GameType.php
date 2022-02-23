@@ -38,7 +38,7 @@ class GameType extends AbstractType
             ->add('users', EntityType::class, [
                 'label' => 'Players',
                 'class' => User::class,
-                'multiple' => true,
+                'multiple' => false,
                 'expanded' => true,
                 'choice_label' => function ($user) {
                     return $user->getName();

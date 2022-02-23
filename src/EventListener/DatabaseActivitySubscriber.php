@@ -8,6 +8,7 @@ use App\Entity\Card;
 use App\Entity\Game;
 use App\Entity\Money;
 use App\Entity\Profile;
+use App\Entity\Comment;
 use App\Entity\CardPattern;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
@@ -62,10 +63,14 @@ class DatabaseActivitySubscriber implements EventSubscriber
         }
 
         if ($entity instanceof Profile) {
-
             $entity->setCreatedAt(new \DateTime());
             $entity->setUpdatedAt(new \DateTime());
+            return;
+        }
 
+        if ($entity instanceof Comment) {
+            $entity->setCreatedAt(new \DateTime());
+            $entity->setUpdatedAt(new \DateTime());
             return;
         }
     }

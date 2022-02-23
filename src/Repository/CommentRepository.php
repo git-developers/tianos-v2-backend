@@ -19,6 +19,30 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Profile::class);
     }
 
+    public function findAll()
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT u
+            FROM App\Entity\Comment u 
+            WHERE 
+            u.comment IS NOT NULL
+            ORDER BY u.id DESC'
+        )
+            //->setParameter('isEnabled', true)
+        ;
+
+
+            ;
+
+        //print_r($query->getSQL());
+        ////exit;
+
+        return $query->getResult();
+
+    }
+
     // /**
     //  * @return Profile[] Returns an array of Profile objects
     //  */
