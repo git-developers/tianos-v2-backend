@@ -3,32 +3,48 @@
 {% block title %}Comment{% endblock %}
 
 {% block body %}
-    <h1>Comment</h1>
 
-    <table class="table">
+    <div class="card-header">
+        <h3 class="card-title">Comment</h3>
+    </div>
+
+<div class="card-body">
+    <table style="width: 410px" class="table table-bordered">
+        <thead>
+        <tr>
+            <th style="width: 10px">#</th>
+            <th style="width: 200px">Atributte</th>
+            <th style="width: 200px">Value</th>
+        </tr>
+        </thead>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ comment.id }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ comment.updatedAt ? comment.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Comment</th>
-                <td>{{ comment.comment }}</td>
-            </tr>
+        <tr>
+            <th>1.</th>
+            <th>Id</th>
+            <td>{{ comment.id }}</td>
+        </tr>
+        <tr>
+            <th>2.</th>
+            <th>Name</th>
+            <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>3.</th>
+            <th>UpdatedAt</th>
+            <td>{{ comment.updatedAt ? comment.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>4.</th>
+            <th>Comment</th>
+            <td>{{ comment.comment }}</td>
+        </tr>
         </tbody>
     </table>
+</div>
 
-    <a href="{{ path('comment_index') }}">back to list</a>
+    <a class=" btn-primary btn-sm" href="{{ path('comment_index') }}">back to list</a>
 
-    <a href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a>
+    <a class=" btn-primary btn-sm" href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a>
 
     {{ include('comment/_delete_form.html.twig') }}
 {% endblock %}

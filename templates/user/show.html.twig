@@ -1,0 +1,173 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <div class="card-header">
+        <h3 class="card-title">User</h3>
+    </div>
+    {# <h1>User</h1> #}
+
+    <div class="card-body">
+        <table style="width: 410px" class="table table-bordered">
+            <thead>
+            <tr>
+                <th style="width: 10px">#</th>
+                <th style="width: 200px">Atributte</th>
+                <th style="width: 200px">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>1.</th>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+
+            <tr>
+                <th>2.</th>
+                <th>Name</th>
+                <td>{{ user.name }}</td>
+            </tr>
+            <tr>
+                <th>3.</th>
+                <th>LastName</th>
+                <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+                <th>4.</th>
+                <th>Phone</th>
+                <td>{{ user.phone }}</td>
+            </tr>
+            <tr>
+                <th>5.</th>
+                <th>Address</th>
+                <td>{{ user.address }}</td>
+            </tr>
+            <tr>
+                <th>6.</th>
+                <th>Notes</th>
+                <td>{{ user.notes }}</td>
+            </tr>
+            <tr>
+                <th>7.</th>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>8.</th>
+                <th>Username</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            {# <tr>
+                    <th>Roles</th>
+                    <td>{{ user.roles }}</td>
+                </tr> #}
+
+            <tr>
+                <th>9.</th>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>10.</th>
+                <th>IsActive</th>
+                <td>{{ user.isActive ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>11.</th>
+                <th>IsEnabled</th>
+                <td>{{ user.isEnabled ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>12.</th>
+                <th>CreatedAt</th>
+                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>13.</th>
+                <th>UpdatedAt</th>
+                <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+
+        {#
+        <table border= 1px solid black class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ user.name }}</td>
+                </tr>
+                <tr>
+                    <th>LastName</th>
+                    <td>{{ user.lastName }}</td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>{{ user.phone }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ user.address }}</td>
+                </tr>
+                <tr>
+                    <th>Notes</th>
+                    <td>{{ user.notes }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Username</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                 <tr>
+                    <th>Roles</th>
+                    <td>{{ user.roles }}</td>
+                </tr>
+
+                <tr>
+                    <th>Password</th>
+                    <td>{{ user.password }}</td>
+                </tr>
+                <tr>
+                    <th>IsActive</th>
+                    <td>{{ user.isActive ? 'Yes' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>IsEnabled</th>
+                    <td>{{ user.isEnabled ? 'Yes' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>CreatedAt</th>
+                    <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>UpdatedAt</th>
+                    <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+        #}
+
+    <a class=" btn-primary btn-sm" href="{{ path('user_index') }}">back to list</a>
+
+    <a class=" btn-primary btn-sm" href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}
+
+
+{% block style %}
+
+
+{% endblock %}

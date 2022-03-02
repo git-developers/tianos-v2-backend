@@ -2,26 +2,22 @@
 
 namespace App\Entity;
 
+use App\Repository\LikeRepository;
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as JMSS;
+
 /**
- * Comment
- *
- * @ORM\Table(name="comment", indexes={@ORM\Index(name="fk_comment_post1_idx", columns={"post_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=LikeRepository::class)
+ * @ORM\Table(name="`like`")
  */
-class Comment
+class Like
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     *
-     *  @JMSS\Groups({"gato5"})
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
+
     /**
      * @var \DateTime|null
      *<
@@ -37,11 +33,11 @@ class Comment
     private $updatedAt;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="comment", type="text", length=65535, nullable=true)
+     * @var \Like
+     * @ORM\Column(name="like", type="boolean")
      */
-    private $comment;
+    private $Like;
+
 
     /**
      * @var \Post
@@ -51,6 +47,7 @@ class Comment
      *   @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      * })
      */
+
     private $post;
 
     /**
@@ -92,14 +89,14 @@ class Comment
         return $this;
     }
 
-    public function getComment(): ?string
+    public function getLike(): ?bool
     {
-        return $this->comment;
+        return $this->Like;
     }
 
-    public function setComment(?string $comment): self
+    public function setLike(bool $Like): self
     {
-        $this->comment = $comment;
+        $this->Like = $Like;
 
         return $this;
     }
@@ -127,6 +124,4 @@ class Comment
 
         return $this;
     }
-
-
 }

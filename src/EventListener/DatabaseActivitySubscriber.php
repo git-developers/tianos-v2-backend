@@ -73,6 +73,10 @@ class DatabaseActivitySubscriber implements EventSubscriber
             $entity->setUpdatedAt(new \DateTime());
             return;
         }
+
+        if ($entity instanceof TiktokjFeed) {
+            $entity->setUuidX(uniqid());
+        }
     }
 
     public function preUpdate(LifecycleEventArgs $args)

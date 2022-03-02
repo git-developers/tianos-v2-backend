@@ -45,6 +45,13 @@ class TiktokFeed
     /**
      * @var string|null
      *
+     * @ORM\Column(name="uuidX", type="text", length=65535, nullable=true)
+     */
+    private $uuuidX;
+
+    /**
+     * @var string|null
+     *
      * @ORM\Column(name="url_list", type="text", length=65535, nullable=true)
      */
     private $url_list;
@@ -186,6 +193,18 @@ class TiktokFeed
     public function setAuthorSignature(?string $author_signature): self
     {
         $this->author_signature = $author_signature;
+
+        return $this;
+    }
+
+    public function getUuuidX(): ?string
+    {
+        return $this->uuuidX;
+    }
+
+    public function setUuuidX(?string $uuuidX): self
+    {
+        $this->uuuidX = $uuuidX;
 
         return $this;
     }
