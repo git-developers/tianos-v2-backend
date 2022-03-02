@@ -137,6 +137,11 @@ class User implements UserInterface
      */
     private $profile;
 
+
+    public function __toString() {
+        return sprintf('%s - %s', $this->id, $this->name);
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -262,7 +267,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt()/*: ?\DateTimeInterface*/
     {
         return $this->createdAt;
     }
